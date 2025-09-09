@@ -1,0 +1,9 @@
+<svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Group to scale and center -->
+  <g transform="translate(100,100) scale(1.5) translate(-100,-100)">
+    <!-- Interlocking modules / chain-inspired shapes -->
+    <path d="M50 50 L100 50 L100 100 L50 100 Z" fill="#000000"/>
+    <path d="M100 50 L150 50 L150 100 L100 100 Z" fill="none" stroke="#000000" stroke-width="12"/>
+    <path d="M75 75 L125 75 L125 125 L75 125 Z" fill="#000000"/>
+  </g>
+</svg>
