@@ -137,7 +137,6 @@ function App() {
       await addSubscription(subscriptionData)
     }
     setShowAddSubscription(false)
-    refetchSubscriptions()
   }
 
   const handleEditSubscription = (subscription: Subscription) => {
@@ -161,7 +160,6 @@ function App() {
       await addDocument(data)
     }
     setShowAddDocument(false)
-    refetchDocuments()
   }
 
   const handleEditDocument = (document: Document) => {
@@ -186,7 +184,6 @@ function App() {
       await addBudget(budgetData)
     }
     setShowAddBudget(false)
-    refetchBudgets()
   }
 
   const handleEditBudget = (budget: Budget) => {
@@ -267,9 +264,6 @@ function App() {
 
       {activeTab === 'subscriptions' && (
         <div>
-          <div className="flex items-center justify-between mb-6">
-            <h1 className={`${compactMode ? 'text-xl' : 'text-2xl'} font-bold text-gray-900 dark:text-white`}>Subscriptions</h1>
-          </div>
           
           <SearchBar
             searchQuery={searchQuery}
@@ -303,9 +297,6 @@ function App() {
 
       {activeTab === 'documents' && (
         <div>
-          <div className="flex items-center justify-between mb-6">
-            <h1 className={`${compactMode ? 'text-xl' : 'text-2xl'} font-bold text-gray-900 dark:text-white`}>Documents</h1>
-          </div>
           
           <SearchBar
             searchQuery={searchQuery}
@@ -339,9 +330,6 @@ function App() {
 
       {activeTab === 'budgets' && (
         <div>
-          <div className="flex items-center justify-between mb-6">
-            <h1 className={`${compactMode ? 'text-xl' : 'text-2xl'} font-bold text-gray-900 dark:text-white`}>Budgets</h1>
-          </div>
           
           <SearchBar
             searchQuery={searchQuery}
@@ -375,9 +363,6 @@ function App() {
 
       {activeTab === 'goals' && (
         <div>
-          <div className="flex items-center justify-between mb-6">
-            <h1 className={`${compactMode ? 'text-xl' : 'text-2xl'} font-bold text-gray-900 dark:text-white`}>Goals</h1>
-          </div>
           
           <SearchBar
             searchQuery={searchQuery}
