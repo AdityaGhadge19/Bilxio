@@ -137,6 +137,7 @@ function App() {
       await addSubscription(subscriptionData)
     }
     setShowAddSubscription(false)
+    refetchSubscriptions()
   }
 
   const handleEditSubscription = (subscription: Subscription) => {
@@ -160,6 +161,7 @@ function App() {
       await addDocument(data)
     }
     setShowAddDocument(false)
+    refetchDocuments()
   }
 
   const handleEditDocument = (document: Document) => {
@@ -184,6 +186,7 @@ function App() {
       await addBudget(budgetData)
     }
     setShowAddBudget(false)
+    refetchBudgets()
   }
 
   const handleEditBudget = (budget: Budget) => {
