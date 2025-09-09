@@ -14,28 +14,13 @@ interface DashboardProps {
 
 export function Dashboard({ subscriptions, documents, budgets, goals, stats }: DashboardProps) {
   const { compactMode, showAnimations } = useSettings()
-  const carouselRef = useRef<HTMLDivElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const cardCount = 6
 
-  // Auto-rotate carousel on mobile
-  useEffect(() => {
-    const isMobile = window.innerWidth < 768
-    if (!isMobile) return
-    const interval = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % cardCount)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
 
   // Scroll to card on index change (mobile only)
   useEffect(() => {
     const isMobile = window.innerWidth < 768
     if (!isMobile) return
-    if (carouselRef.current) {
-      const card = carouselRef.current.children[currentIndex] as HTMLElement
-      if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
-    }
   }, [currentIndex])
   const today = new Date()
   const nextWeek = addDays(today, 7)
@@ -56,61 +41,61 @@ export function Dashboard({ subscriptions, documents, budgets, goals, stats }: D
   return (
     <div className="space-y-6">
   {/* Stats Cards: Carousel on mobile, grid on md+ */}
-  <div ref={carouselRef} className="flex overflow-x-auto gap-4 md:grid md:grid-cols-2 lg:grid-cols-5 md:overflow-x-visible md:gap-4 scrollbar-hide snap-x snap-mandatory">
-  <div className={`min-w-[85vw] md:min-w-0 bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-shadow duration-200' : ''} snap-center h-[30vh] flex flex-col justify-center items-center md:h-auto md:items-start md:justify-start`}>
+  <div className="flex overflow-x-auto gap-4 md:grid md:grid-cols-2 lg:grid-cols-6 md:overflow-x-visible md:gap-4 scrollbar-hide snap-x snap-mandatory">
+  <div className={`min-w-[85vw] md:min-w-0 bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-shadow duration-200' : ''} snap-center h-[30vh] flex flex-col justify-center items-center md:h-auto md:items-start md:justify-start lg:h-[22vh]`}>
     <div className="flex flex-col items-center justify-center h-full w-full">
       <div className="p-2 bg-gray-900 dark:bg-white rounded-lg mb-2">
-        <DollarSign className="h-8 w-8 text-white dark:text-gray-900" />
+        <DollarSign className="h-6 w-6 text-white dark:text-gray-900" />
       </div>
       <p className="text-base font-semibold text-gray-900 dark:text-white mb-1">Monthly Spend</p>
       <p className="text-2xl font-bold text-gray-900 dark:text-white">${stats.totalMonthlySpend.toFixed(2)}</p>
     </div>
   </div>
 
-  <div className={`min-w-[85vw] md:min-w-0 bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-shadow duration-200' : ''} snap-center h-[30vh] flex flex-col justify-center items-center md:h-auto md:items-start md:justify-start`}>
+  <div className={`min-w-[85vw] md:min-w-0 bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-shadow duration-200' : ''} snap-center h-[30vh] flex flex-col justify-center items-center md:h-auto md:items-start md:justify-start lg:h-[22vh]`}>
     <div className="flex flex-col items-center justify-center h-full w-full">
       <div className="p-2 bg-gray-900 dark:bg-white rounded-lg mb-2">
-        <CreditCard className="h-8 w-8 text-white dark:text-gray-900" />
+        <CreditCard className="h-6 w-6 text-white dark:text-gray-900" />
       </div>
-      <p className="text-base font-semibold text-gray-900 dark:text-white mb-1">Active Subscriptions</p>
+      <p className="text-base font-semibold text-center text-gray-900 dark:text-white mb-1">Active Subscriptions</p>
       <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.activeSubscriptions}</p>
     </div>
   </div>
 
-  <div className={`min-w-[85vw] md:min-w-0 bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-shadow duration-200' : ''} snap-center h-[30vh] flex flex-col justify-center items-center md:h-auto md:items-start md:justify-start`}>
+  <div className={`min-w-[85vw] md:min-w-0 bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-shadow duration-200' : ''} snap-center h-[30vh] flex flex-col justify-center items-center md:h-auto md:items-start md:justify-start lg:h-[22vh]`}>
     <div className="flex flex-col items-center justify-center h-full w-full">
       <div className="p-2 bg-gray-900 dark:bg-white rounded-lg mb-2">
-        <Clock className="h-8 w-8 text-white dark:text-gray-900" />
+        <Clock className="h-6 w-6 text-white dark:text-gray-900" />
       </div>
-      <p className="text-base font-semibold text-gray-900 dark:text-white mb-1">Upcoming Renewals</p>
+      <p className="text-base text-center font-semibold text-gray-900 dark:text-white mb-1">Upcoming Renewals</p>
       <p className="text-2xl font-bold text-gray-900 dark:text-white">{upcomingRenewals.length}</p>
     </div>
   </div>
 
-  <div className={`min-w-[85vw] md:min-w-0 bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-shadow duration-200' : ''} snap-center h-[30vh] flex flex-col justify-center items-center md:h-auto md:items-start md:justify-start`}>
+  <div className={`min-w-[85vw] md:min-w-0 bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-shadow duration-200' : ''} snap-center h-[30vh] flex flex-col justify-center items-center md:h-auto md:items-start md:justify-start lg:h-[22vh]`}>
     <div className="flex flex-col items-center justify-center h-full w-full">
       <div className="p-2 bg-gray-900 dark:bg-white rounded-lg mb-2">
-        <FileText className="h-8 w-8 text-white dark:text-gray-900" />
+        <FileText className="h-6 w-6 text-white dark:text-gray-900" />
       </div>
       <p className="text-base font-semibold text-gray-900 dark:text-white mb-1">Documents</p>
       <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.documentsCount}</p>
     </div>
   </div>
 
-  <div className={`min-w-[85vw] md:min-w-0 bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-shadow duration-200' : ''} snap-center h-[30vh] flex flex-col justify-center items-center md:h-auto md:items-start md:justify-start`}>
+  <div className={`min-w-[85vw] md:min-w-0 bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-shadow duration-200' : ''} snap-center h-[30vh] flex flex-col justify-center items-center md:h-auto md:items-start md:justify-start lg:h-[22vh]`}>
     <div className="flex flex-col items-center justify-center h-full w-full">
       <div className="p-2 bg-gray-900 dark:bg-white rounded-lg mb-2">
-        <DollarSign className="h-8 w-8 text-white dark:text-gray-900" />
+        <DollarSign className="h-6 w-6 text-white dark:text-gray-900" />
       </div>
       <p className="text-base font-semibold text-gray-900 dark:text-white mb-1">Budget Usage</p>
       <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalBudgetLimit > 0 ? `${((stats.totalBudgetSpent / stats.totalBudgetLimit) * 100).toFixed(1)}%` : '0%'}</p>
     </div>
   </div>
 
-  <div className={`min-w-[85vw] md:min-w-0 bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-shadow duration-200' : ''} snap-center h-[30vh] flex flex-col justify-center items-center md:h-auto md:items-start md:justify-start`}>
+  <div className={`min-w-[85vw] md:min-w-0 bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-shadow duration-200' : ''} snap-center h-[30vh] flex flex-col justify-center items-center md:h-auto md:items-start md:justify-start lg:h-[22vh]`}>
     <div className="flex flex-col items-center justify-center h-full w-full">
       <div className="p-2 bg-gray-900 dark:bg-white rounded-lg mb-2">
-        <Target className="h-8 w-8 text-white dark:text-gray-900" />
+        <Target className="h-6 w-6 text-white dark:text-gray-900" />
       </div>
       <p className="text-base font-semibold text-gray-900 dark:text-white mb-1">Goals Progress</p>
       <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalGoalProgress.toFixed(1)}%</p>
