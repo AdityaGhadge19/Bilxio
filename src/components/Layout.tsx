@@ -86,7 +86,7 @@ export function Layout({
         </div>
       </header>
 
-      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${compactMode ? 'py-4' : 'py-8'}`}>
+      <div className={`max-w-7xl mx-auto mb-14 px-4 sm:px-6 lg:px-8 ${compactMode ? 'py-4' : 'py-8'}`}>
         {/* Navigation Tabs */}
         <div className={`flex flex-col gap-2 ${compactMode ? 'mb-4' : 'mb-8'}`}>
           <div className="flex space-x-1">
