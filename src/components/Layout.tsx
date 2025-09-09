@@ -60,45 +60,6 @@ export function Layout({
             </div>
 
             <div className="flex items-center space-x-4">
-              <div className="hidden sm:flex items-center space-x-2">
-                {activeTab === 'subscriptions' && onShowAddSubscription && (
-                  <button
-                    onClick={onShowAddSubscription}
-                    className={`inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 dark:bg-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 ${showAnimations ? 'transition-all duration-200' : ''}`}
-                  >
-                    <Plus className="h-4 w-4 mr-1" />
-                    Add Subscription
-                  </button>
-                )}
-                {activeTab === 'documents' && onShowAddDocument && (
-                  <button
-                    onClick={onShowAddDocument}
-                    className={`inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 dark:bg-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 ${showAnimations ? 'transition-all duration-200' : ''}`}
-                  >
-                    <Plus className="h-4 w-4 mr-1" />
-                    Add Document
-                  </button>
-                )}
-                {activeTab === 'budgets' && onShowAddBudget && (
-                  <button
-                    onClick={onShowAddBudget}
-                    className={`inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 dark:bg-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 ${showAnimations ? 'transition-all duration-200' : ''}`}
-                  >
-                    <Plus className="h-4 w-4 mr-1" />
-                    Add Budget
-                  </button>
-                )}
-                {activeTab === 'goals' && onShowAddGoal && (
-                  <button
-                    onClick={onShowAddGoal}
-                    className={`inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 dark:bg-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 ${showAnimations ? 'transition-all duration-200' : ''}`}
-                  >
-                    <Plus className="h-4 w-4 mr-1" />
-                    Add Goal
-                  </button>
-                )}
-              </div>
-
               <div className="flex items-center space-x-3">
                 <button className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full bg-yellow-300 text-gray-900 hover:bg-yellow-400 transition mr-2">
                   <Gem className="h-4 w-4 block sm:hidden" />
@@ -161,6 +122,47 @@ export function Layout({
         </div>
 
         {/* Content */}
+        <div className="mb-4 flex items-center justify-between">
+          <h1 className={`${compactMode ? 'text-xl' : 'text-2xl'} font-bold text-gray-900 dark:text-white`}>
+            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+          </h1>
+
+          {activeTab === 'subscriptions' && onShowAddSubscription && (
+            <button
+              onClick={onShowAddSubscription}
+              className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-white bg-gray-900 dark:bg-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100"
+            >
+              <Plus className="h-4 w-4 mr-1" /> Add Subscription
+            </button>
+          )}
+
+          {activeTab === 'documents' && onShowAddDocument && (
+            <button
+              onClick={onShowAddDocument}
+              className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-white bg-gray-900 dark:bg-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100"
+            >
+              <Plus className="h-4 w-4 mr-1" /> Add Document
+            </button>
+          )}
+
+          {activeTab === 'budgets' && onShowAddBudget && (
+            <button
+              onClick={onShowAddBudget}
+              className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-white bg-gray-900 dark:bg-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100"
+            >
+              <Plus className="h-4 w-4 mr-1" /> Add Budget
+            </button>
+          )}
+
+          {activeTab === 'goals' && onShowAddGoal && (
+            <button
+              onClick={onShowAddGoal}
+              className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-white bg-gray-900 dark:bg-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100"
+            >
+              <Plus className="h-4 w-4 mr-1" /> Add Goal
+            </button>
+          )}
+        </div>
         {children}
       </div>
     </div>
