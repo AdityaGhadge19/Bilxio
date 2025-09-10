@@ -1,9 +1,33 @@
 <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <!-- Group to scale and center -->
+  <defs>
+    <!-- Gradients for finance colors -->
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#28a745; stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a7e3f; stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3c72; stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a5298; stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f1c40f; stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4ac0d; stop-opacity:1" />
+    </linearGradient>
+    <!-- Soft shadow filter for depth -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
   <g transform="translate(100,100) scale(1.5) translate(-100,-100)">
-    <!-- Interlocking modules / chain-inspired shapes -->
-    <path d="M50 50 L100 50 L100 100 L50 100 Z" fill="#000000"/>
-    <path d="M100 50 L150 50 L150 100 L100 100 Z" fill="none" stroke="#000000" stroke-width="12"/>
-    <path d="M75 75 L125 75 L125 125 L75 125 Z" fill="#000000"/>
+    <!-- Back square: Green, slight rotation -->
+    <rect x="50" y="50" width="50" height="50" rx="12" ry="12" fill="url(#greenGrad)" transform="rotate(-6 75 75)" filter="url(#shadow)"/>
+    
+    <!-- Middle square: Blue, small rotation for dynamic feel -->
+    <rect x="75" y="75" width="50" height="50" rx="10" ry="10" fill="url(#blueGrad)" transform="rotate(3 100 100)" filter="url(#shadow)"/>
+    
+    <!-- Front square: Gold, tilt opposite direction -->
+    <rect x="100" y="50" width="50" height="50" rx="8" ry="8" fill="url(#goldGrad)" transform="rotate(5 125 75)" filter="url(#shadow)"/>
   </g>
 </svg>
+
