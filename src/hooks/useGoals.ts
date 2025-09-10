@@ -119,34 +119,60 @@ export function useGoals(userId: string | undefined) {
     }
   }
 
-  const addContribution = async (goalId: string, amount: number, description: string) => {
+  // const addContribution = async (goalId: string, amount: number, description: string) => {
+  //   try {
+  //     // Add the transaction first
+  //     const { error: transactionError } = await supabase
+  //       .from('goals')
+  //       .insert([{
+  //         user_id: userId,
+  //         goal_id: goalId,
+  //         amount,
+  //         description,
+  //         category: 'goal_contribution',
+  //         transaction_type: 'goal_contribution'
+  //       }])
+
+  //     if (transactionError) throw transactionError
+
+  //     // Then update the goal's current amount
+  //     const goal = goals.find(g => g.id === goalId)
+  //     if (goal) {
+  //       const newAmount = goal.current_amount + amount
+  //       await updateGoal(goalId, { current_amount: newAmount })
+  //     }
+
+  //     return { error: null }
+  //   } catch (err) {
+  //     return { error: err instanceof Error ? err.message : 'Unknown error' }
+  //   }
+  // }
+
+  const addContribution = async (goalId: string, amount: number) => {
     try {
-      // Add the transaction first
-      const { error: transactionError } = await supabase
-        .from('transactions')
-        .insert([{
-          user_id: userId,
-          goal_id: goalId,
-          amount,
-          description,
-          category: 'goal_contribution',
-          transaction_type: 'goal_contribution'
-        }])
-
-      if (transactionError) throw transactionError
-
-      // Then update the goal's current amount
+      // Find the goal
       const goal = goals.find(g => g.id === goalId)
-      if (goal) {
-        const newAmount = goal.current_amount + amount
-        await updateGoal(goalId, { current_amount: newAmount })
-      }
+      if (!goal) throw new Error("Goal not found")
 
-      return { error: null }
+      const newAmount = goal.current_amount + amount
+
+      // Update current_amount in the goals table
+      const { error: updateError } = await supabase
+        .from('goals')
+        .update({ current_amount: newAmount })
+        .eq('id', goalId)
+
+      if (updateError) throw updateError
+
+      return { error: null, newAmount }
     } catch (err) {
       return { error: err instanceof Error ? err.message : 'Unknown error' }
     }
   }
+
+
+
+
 
   return {
     goals,
