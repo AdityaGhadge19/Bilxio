@@ -227,7 +227,7 @@ function App() {
   }
 
   const handleAddContribution = async (goalId: string, amount: number, description: string) => {
-    await addContribution(goalId, amount, description)
+    await addContribution(goalId, amount)
   }
 
   if (authLoading) {
