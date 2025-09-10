@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Target, Edit3, Trash2, MoreVertical, Plus } from 'lucide-react'
 import { format, differenceInDays } from 'date-fns'
 import { Goal } from '../lib/types'
@@ -24,22 +24,40 @@ export function GoalCard({ goal, onEdit, onDelete, onAddContribution }: GoalCard
 
   const getEstimatedCompletion = () => {
     if (isCompleted || !goal.end_date) return null
-    
+
     const daysRemaining = differenceInDays(new Date(goal.end_date), new Date())
     if (daysRemaining <= 0) return 'Overdue'
-    
+
     return `${daysRemaining} days remaining`
   }
 
-  const handleAddContribution = () => {
-    const amount = parseFloat(contributionAmount)
-    if (amount > 0 && contributionDescription.trim()) {
-      onAddContribution(goal.id, amount, contributionDescription)
-      setContributionAmount('')
-      setContributionDescription('')
-      setShowContribution(false)
+  // const handleAddContribution = () => {
+  //   const amount = parseFloat(contributionAmount)
+  //   if (amount > 0 && contributionDescription.trim()) {
+  //     onAddContribution(goal.id, amount, contributionDescription)
+  //     setContributionAmount('')
+  //     setContributionDescription('')
+  //     setShowContribution(false)
+  //   }
+  // }
+
+  const handleAddContribution = async () => {
+    try {
+      const amount = parseFloat(contributionAmount)
+      if (amount > 0 && contributionDescription.trim()) {
+        await onAddContribution(goal.id, amount, contributionDescription)
+        goal.current_amount += amount
+        setContributionAmount('')
+        setContributionDescription('')
+        setShowContribution(false)
+      }
+    } catch (err) {
+      console.error("Failed to add contribution:", err)
     }
   }
+
+
+
 
   return (
     <div className={`bg-white dark:bg-gray-900 ${compactMode ? 'p-4' : 'p-6'} rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md ${showAnimations ? 'transition-all duration-200' : ''} group`}>
