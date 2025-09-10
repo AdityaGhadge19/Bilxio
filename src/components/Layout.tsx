@@ -93,7 +93,7 @@ export function Layout({
 
             <div className="bg-white dark:bg-gray-900 rounded-t-lg p-2 shadow-sm border gap-2 border-gray-200 dark:border-gray-700
              flex justify-around fixed bottom-0 left-0 right-0
-             h-[10vh] md:h-auto
+             h-[8vh] md:h-auto
              md:static md:rounded-lg
              [&>*]:flex-1 text-center
              [&>*>span]:hidden md:[&>*>span]:inline
